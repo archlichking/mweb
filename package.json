@@ -1,0 +1,23 @@
+{
+  "name": "mweb",
+  "version": "0.0.1",
+  "description": "mobile web browser utility",
+  "repository": {
+    "url": "https://github.com/archlichking/mweb"
+  },
+  "main": "./lib/browser",
+  "keywords": [
+    "mobile",
+    "web",
+    "automation"
+  ],
+  "dependencies": {
+    "selenium-webdriver": "~2.40.0",
+    "phantomjs": "~1.9.7",
+    "selenium-server-standalone-jar": ">=2.40.0",
+    "config": "~0.4.35"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
