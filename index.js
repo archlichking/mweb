@@ -1,1 +1,1 @@
-module.exports = require('lib').Browser;
+module.exports = require('lib');
