@@ -12,8 +12,7 @@
     "automation"
   ],
   "dependencies": {
-    "selenium-webdriver": "~2.40.1",
-    // "phantomjs": "~1.9.7",
+    "selenium-webdriver": "~2.40.0",
     "selenium-server-standalone-jar": ">=2.40.0",
     "config": "~0.4.35"
   },
