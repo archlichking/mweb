@@ -1,0 +1,7 @@
+{
+  "browser": {
+    "name": "chrome"
+  },
+  "host": "http://www.google.com",
+  "timeout": 80000
+}
