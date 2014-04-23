@@ -86,13 +86,9 @@ test.describe('unit test for mweb.js', function() {
 			this._browser = browser;
 			this._dependencies = dependencies;
 
-			this.helloworld = function(injections, callback) {
+			this.helloworld = function() {
 				// do something here
-				this.call(injections, function(results) {
-					if (callback) {
-						callback(results);
-					}
-				});
+				return this.call(arguments);
 			};
 		};
 
@@ -150,8 +146,7 @@ test.describe('unit test for mweb.js', function() {
 			test.it('page initialized with dependencies should work correctly', function() {
 				var dependency = {
 					screenshot: {
-						path: 'this is the screenshot path',
-						name: 'screenshot name'
+						path: 'this is the screenshot path'
 					}
 				};
 
@@ -159,24 +154,46 @@ test.describe('unit test for mweb.js', function() {
 				homePage.helloworld();
 			});
 
-			test.it('method calls injection should work correctly', function() {
+			test.it('method injection without callback should work correctly', function() {
 				var dependency = {
 					screenshot: {
-						path: 'this is the screenshot path',
-						name: 'screenshot name'
+						path: 'this is the screenshot path'
 					}
 				};
 
 				var homePage = new Home('browser', dependency);
 
-				homePage.screenshot = function(args) {
-					return args;
+				homePage.screenshot = function(depArgs, runArgs) {
+					return [depArgs.path, runArgs];
 				}
 
-				homePage.helloworld(['screenshot'], function(results) {
+				var results = homePage.helloworld('screenshot');
+				expect(results.length).to.equal(2);
+				expect(results[0]).to.equal(dependency.screenshot.path);
+
+				var results = homePage.helloworld('screenshot', 'hehehehehe');
+				expect(results.length).to.equal(2);
+				expect(results[0]).to.equal(dependency.screenshot.path);
+				expect(results[1]).to.equal('hehehehehe');
+			});
+
+			test.it('method injection with callback should work correctly', function() {
+				var dependency = {
+					screenshot: {
+						path: 'this is the screenshot path'
+					}
+				};
+
+				var homePage = new Home('browser', dependency);
+
+				homePage.screenshot = function(depArgs, runArgs) {
+					return [depArgs.path, runArgs];
+				}
+
+				homePage.helloworld(['screenshot'], 'hehehehehe', function(results) {
 					expect(results.length).to.equal(1);
-					expect(results[0].path).to.equal(dependency.screenshot.path);
-					expect(results[0].name).to.equal(dependency.screenshot.name);
+					expect(results[0][0]).to.equal(dependency.screenshot.path);
+					expect(results[0][1]).to.equal('hehehehehe');
 				});
 			});
 		});
