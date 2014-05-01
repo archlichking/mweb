@@ -1,6 +1,6 @@
 {
   "name": "mweb",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "mobile web browser utility",
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
     "config": ">=0.4.35"
   },
   "dependencies": {
-    "merge": ">=1.1.3"
+    "merge": ">=1.1.3",
+    "mkdirp": ">=0.4.0"
   },
   "engines": {
     "node": "*"
